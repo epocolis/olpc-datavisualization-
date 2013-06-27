@@ -23,13 +23,6 @@ app.config.from_object(__name__)
 app.config.from_envvar('OLPC_SETTINGS', silent=True)
 
 
-
-import pygal
-from pygal.style import CleanStyle
-import time
-
-
-
 def connect_db():
     pass
     #    return sqlite3.connect(app.config['DATABASE'])
