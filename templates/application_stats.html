@@ -1,13 +1,20 @@
 {% extends "base.html" %}
-{% block body %}
+
 <div class="container-fluid">
+
+  {% block page_title %}
+
   <div class="page-header">
     <h1>Stats about applications <small>statistics about applications</small></h1>
+  </div>
+ 
+  {% endblock %}
 
-    <div class="custom_nav">   </div>    
-    
-    Description of page
-    <left menu>
+
+{% block body %}
+
+  Description of page
+
       application [ usage vs time ] - shows how much a given application is being used across all projects ?what is the most popular application overall
       -use case: 1) user selects application from drop down menu
                  2) systems generates graph of usage vs time(starting at the start of the project)
@@ -33,24 +40,5 @@
 
     
     project_y application_k_usage vs project_x application_j_usage - visually compare the usage of any two applications
-
-    
-      <ul>
-	<li class="dropdown">
-	  Your Account
-	  <ul class="dropdown-menu">
-	    <li><a href="#">Login</a></li>
-	    <li><a href="#">Profile</a></li>
-	    <li><a href="#">Cart</a></li>
-	  </ul>
-	</li>
-	<ul>
-	  
-    
-
-    
-    </div>
-
-</div>
 
 {% endblock %}

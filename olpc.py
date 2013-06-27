@@ -115,7 +115,7 @@ def getAllProjectsFromDB():
 @app.route('/')
 def main_page():
     
-    return render_template('index.html')
+    return render_template('index.html', page = "FRONT_PAGE")
 
 
 @app.route('/add', methods=['POST'])
