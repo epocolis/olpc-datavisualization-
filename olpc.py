@@ -114,9 +114,8 @@ def getAllProjectsFromDB():
 
 @app.route('/')
 def main_page():
-    cur = g.db.execute('select title, text from entries order by id desc')
-    entries = [dict(title=row[0], text=row[1]) for row in cur.fetchall()]
-    return render_template('index.html', entries=entries)
+    
+    return render_template('index.html')
 
 
 @app.route('/add', methods=['POST'])
@@ -158,8 +157,8 @@ def logout():
     flash('You were logged out')
     return redirect(url_for('show_entries'))
 
-"""
+
 if __name__ == '__main__':
     init_db()
     app.run()
-"""
+
