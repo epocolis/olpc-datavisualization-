@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="page-header">
+    <h1>Project Stats <small>statistics about XO projects</small></h1>
+</div>
+
+<!--Insert a graph -->
+<!--Insert a table with the list of all projects,maybe i can scrape this from the olpc wiki -->
+<!--Need to generate the values for the table head and row values -->
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+       {% for header in column_headers %}
+       <th>{{header}}</th>
+       {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for project in projects %}
+    <tr>
+      <td>{{project.name}}</td>
+      <td>{{project.country}}</td>
+      <td>{{project.dateStarted}}</td>
+      <td>{{project.numberOfXO}}</td>
+
+      <!--need to stick the project id in this called -->
+      <td><a class="btn btn-medium btn-primary" href="{{ url_for('applications_stats_page') }}">View details &raquo;</a></td>
+    </tr>
+   {% endfor %} 
+  </tbody>
+
+      
+</table>
+
+
+
+
+
+
+
+
+{% endblock %}

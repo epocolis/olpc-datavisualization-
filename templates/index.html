@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="container">
+  <div class="row-fluid">
+    <div id="kpi_total_projects" class="span4 kpi">
+      <h4>Total Projects</h4>
+      <p>150</p>
+      <p><a class="btn btn-medium btn-primary" href="{{ url_for('projects_stats_page') }}">View details &raquo;</a></p>
+    </div><!--/span-->
+
+    <div class="kpi_total_applications span4 kpi" >
+      <h4>Total Applications</h4>
+      <p>450</p>
+      <p><a  class="btn btn-medium btn-primary" href="{{ url_for('applications_stats_page') }}">View details &raquo;</a></p>
+    </div><!--/span-->
+    <div class="kpi_pop_app span4 kpi">
+      <h4>Most Popular Application</h4>
+      <p>Math toy</p>
+      <p><a class="btn btn-medium btn-primary" href="{{ url_for('applications_stats_page') }}">View details &raquo;</a></p>
+    </div><!--/span-->
+  </div><!--/row-->
+
+  <div class="center row-fluid">
+    <div class="span2" >
+    </div><!--/span-->
+    <div class="xowild span4 kpi" >
+      <h4>Total XO in the wild</h4>
+      <p>40450</p>
+      <p><a  class="btn btn-medium btn-primary" href="{{ url_for('xo_stats_page') }}">View details &raquo;</a></p>
+    </div><!--/span-->
+
+
+    <div class="ldeploy span4 kpi" >
+      <h4>Largest Deployment</h4>
+      <p>40450</p>
+      <p><a  class="btn btn-medium btn-primary" href="{{ url_for('xo_stats_page') }}" >View details &raquo;</a></p>
+    </div><!--/span-->
+    <div class="span2" >
+    </div><!--/span-->
+  </div><!--/row-->
+
+</div>
+
+{% endblock %}
