@@ -1,5 +1,7 @@
 # all the imports
 
+from flask.ext.sqlalchemy import SQLAlchemy
+
 from flask import Flask, make_response ,jsonify
 import random
 import StringIO
@@ -21,6 +23,9 @@ PASSWORD = 'default'
 app = Flask(__name__)
 app.config.from_object(__name__)
 app.config.from_envvar('OLPC_SETTINGS', silent=True)
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL","postgresql://postgres:!hessian!/olpc_dashboard")
+db = SQLAlchemy(app)
+
 
 
 def connect_db():
