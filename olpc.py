@@ -13,11 +13,9 @@ from flask import Flask, request, session, g, redirect, url_for, abort, \
 
 
 # configuration
-DATABASE = '/tmp/flaskr.db'
 DEBUG = True
-SECRET_KEY = 'development key'
-USERNAME = 'admin'
-PASSWORD = 'default'
+SECRET_KEY = 'D\xf04\xa9\xa8\xac`\x99?\x98m\xd7\x98j\x89\xac6\x84&\x87\xe4y\xce\xceKl\xd0E`D\xa0\n'
+
 
 
 app = Flask(__name__)
