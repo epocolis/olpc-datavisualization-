@@ -74,6 +74,13 @@ def applications_stats_page():
     return render_template('application_stats.html', data=data)
 
 
+
+@app.route('/about_us', methods=['GET', 'POST'])
+def about_us():
+    return "about us"
+
+
+
 @app.route('/xo_stats', methods=['GET', 'POST'])
 def xo_stats_page():
     """ stats about xo in the wild, version firmware,applications,

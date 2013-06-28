@@ -23,29 +23,37 @@
 	    <span class="icon-bar"></span>
 	    <span class="icon-bar"></span>
 	  </button>
-	  <a class="brand" href="#">OLPC DASHBOARD</a>
+	  <a class="brand" href="{{ url_for('main_page') }}">OLPC DASHBOARD</a>
 	  <div class="nav-collapse collapse">
 	    <ul class="nav">
-	      <li class="active"><a href="{{ url_for('main_page') }}">Home</a></li>
-	      <li><a href="{{ url_for('login') }}">Login</a></li>
-	      <li><a href="#about">About</a></li>
-	      <li><a href="{{ url_for('contact_us') }}">Contact</a></li>
+	      <li><a href="{{ url_for('main_page') }}">Home</a></li>
+	      <li><a href="{{ url_for('projects_stats_page') }}">Project Stats</a></li>
+	      <li><a href="{{ url_for('applications_stats_page') }}">Application Stats</a></li>
+	      <li><a href="{{ url_for('xo_stats_page') }}">XO Stats</a></li>
+	      
+	    </ul>
+
+	    <ul class="nav pull-right">
+	      <li class="pull-right"><a href="{{ url_for('login') }}">Login</a></li>
 	      <li><a href="http://one.laptop.org/">one laptop per child</a></li>
 	    </ul>
+
+
+	    
 	  </div><!--/.nav-collapse -->
 	</div>
       </div>
     </div>
 
+
     
     <div class="container-fluid">
 
       {% block page_title %}
-
-
       {% endblock %}
 
-      {%  if  page != "FRONT_PAGE"  %}
+      {% block menu_bar %}
+
       <div class="row-fluid">
 	<div class="btn-toolbar" style="margin: 0;">
 	  <div class="btn-group">
@@ -103,7 +111,7 @@
 	</div><!-- /btn-toolbar -->
       </div>
 
-     {% endif %}
+     {% endblock %}
 
 
 
@@ -127,6 +135,8 @@
     </div> <!--container  div -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename="jquery/jquery-1.10.1.js") }}"></script>
+    <script src="{{ url_for('static', filename="custom_js/util.js") }}"></script>
     <script src="{{ url_for('static', filename="bootstrap/js/bootstrap.min.js") }}"></script>
     <script src="{{ url_for('static', filename="RGraph/libraries/RGraph.common.core.js") }}"></script>
     <script src="{{ url_for('static', filename="RGraph/libraries/RGraph.bar.js") }}"></script>
