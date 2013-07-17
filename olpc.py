@@ -1,75 +1,64 @@
 # all the imports
-
-from flask.ext.sqlalchemy import SQLAlchemy
 import os
-from flask import Flask, make_response ,jsonify
-import random
-import StringIO
-
-from contextlib import closing
-from sqlite3 import dbapi2 as sqlite3
-from flask import Flask, request, session, g, redirect, url_for, abort, \
-         render_template, flash, _app_ctx_stack
+from flask import Flask, render_template
+from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.security import Security, SQLAlchemyUserDatastore, \
+        UserMixin, RoleMixin, login_required
+from flask.ext.security.utils import encrypt_password
+from flask.ext.security.views import register
 
 
 # configuration
 DEBUG = True
-SECRET_KEY = 'D\xf04\xa9\xa8\xac`\x99?\x98m\xd7\x98j\x89\xac6\x84&\x87\xe4y\xce\xceKl\xd0E`D\xa0\n'
-
-
 
 app = Flask(__name__)
+app.config['SECURITY_REGISTERABLE'] = True
+app.config["SECURITY_PASSWORD_HASH"] = "bcrypt"
+app.config["SECURITY_PASSWORD_SALT"] = "salty"
+app.secret_key = 'D\xf04\xa9\xa8\xac`\x99?\x98m\xd7\x98j\x89\xac6\x84&\x87\xe4y\xce\xceKl\xd0E`D\xa0\n' 
 app.config.from_object(__name__)
 app.config.from_envvar('OLPC_SETTINGS', silent=True)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL","postgresql://olpc:!hessian!@localhost/olpc_dashboard")
 db = SQLAlchemy(app)
 
 
+# Define models
+roles_users = db.Table('roles_users',
+                       db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
+                       db.Column('role_id', db.Integer(), db.ForeignKey('role.id')))
 
-class User(db.Model):
+class Role(db.Model, RoleMixin):
+    id = db.Column(db.Integer(), primary_key=True)
+    name = db.Column(db.String(80), unique=True)
+    description = db.Column(db.String(255))
+
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80))
-    email = db.Column(db.String(120), unique=True)
+    email = db.Column(db.String(255), unique=True)
+    password = db.Column(db.String(255))
+    active = db.Column(db.Boolean())
+    confirmed_at = db.Column(db.DateTime())
+    roles = db.relationship('Role', secondary=roles_users,
+                            backref=db.backref('users', lazy='dynamic'))
 
-    def __init__(self, name, email):
-        self.name = name
-        self.email = email
+# Setup Flask-Security
+user_datastore = SQLAlchemyUserDatastore(db, User, Role)
+security = Security(app, user_datastore)
 
-    def __repr__(self):
-        return '<Name %r>' % self.name
+# Create a user to test with
+"""
+@app.before_first_request
+def create_user():
+    db.create_all()
+    user_datastore.create_user(email='leotisbuchanan2@gmail.com',password=encrypt_password('password'))
+    db.session.commit()
+"""
 
-
-
-
-def connect_db():
-    pass
-    #    return sqlite3.connect(app.config['DATABASE'])
-
-
-@app.before_request
-def before_request():
-    pass
-    #g.db = connect_db()
-    
 
 @app.teardown_request
 def teardown_request(exception):
     pass
-    """
-    db = getattr(g, 'db', None)
-    if db is not None:
-        db.close()
-        """
 
-
-def init_db():
-    pass
-"""
-    with closing(connect_db()) as db:
-        with app.open_resource('schema.sql', mode='r') as f:
-            db.cursor().executescript(f.read())
-            db.commit()
-"""
 
 @app.route('/project_stats', methods=['GET', 'POST'])
 def projects_stats_page():
@@ -85,28 +74,27 @@ def projects_stats_page():
                            projects=projects)
 
 
-@app.route('/applications_stats', methods=['GET', 'POST'])
+@app.route('/applications_stats', methods=['GET'])
 def applications_stats_page():
     """ stats about application,use, time of day used """
     data = {} 
     return render_template('application_stats.html', data=data)
 
 
+@app.route('/register', methods=['GET'])
+def register_wrapper():
+    return register()
 
-@app.route('/about_us', methods=['GET', 'POST'])
+
+@app.route('/about_us', methods=['GET'])
 def about_us():
     return "about us"
 
 
-
-@app.route('/xo_stats', methods=['GET', 'POST'])
+@app.route('/xo_stats', methods=['GET'])
 def xo_stats_page():
-    """ stats about xo in the wild, version firmware,applications,
-    """
-
     data = {} 
     return render_template('xo_stats.html',data=data )
-
 
 
 class Project:
@@ -137,22 +125,11 @@ def getAllProjectsFromDB():
     projects = createDummyProjects(40)
     return projects
 
+
 @app.route('/')
+@login_required
 def main_page():
-    
-    return render_template('index.html', page = "FRONT_PAGE")
-
-
-@app.route('/add', methods=['POST'])
-def add_entry():
-    if not session.get('logged_in'):
-        abort(401)
-    g.db.execute('insert into entries (title, text) values (?, ?)',
-                 [request.form['title'], request.form['text']])
-    g.db.commit()
-    flash('New entry was successfully posted')
-    return redirect(url_for('show_entries'))
-
+      return render_template('index.html', page = "FRONT_PAGE")
 
 
 @app.route('/contact', methods=['GET', 'POST'])
@@ -161,29 +138,8 @@ def contact_us():
     return render_template('contact_us.html', error=error)
 
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    error = None
-    if request.method == 'POST':
-        if request.form['username'] != app.config['USERNAME']:
-            error = 'Invalid username'
-        elif request.form['password'] != app.config['PASSWORD']:
-            error = 'Invalid password'
-        else:
-            session['logged_in'] = True
-            flash('You were logged in')
-            return redirect(url_for('show_entries'))
-    return render_template('login.html', error=error)
-        
-
-@app.route('/logout')
-def logout():
-    session.pop('logged_in', None)
-    flash('You were logged out')
-    return redirect(url_for('show_entries'))
 
 
 if __name__ == '__main__':
-    init_db()
     app.run()
 
