@@ -1,5 +1,5 @@
 Postgres instructions
-
+-------------------
 mysql: SHOW TABLES
 postgresql: \d
 postgresql: SELECT table_name FROM information_schema.tables WHERE table_schema = 'public';
@@ -16,7 +16,29 @@ mysql: DESCRIBE TABLE
 postgresql: \d+ table
 postgresql: SELECT column_name FROM information_schema.columns WHERE table_name ='table';
 
+committing to bitbucket
+----------------------
+git push origin  master
 
-connecting to heroku
+adding bitbucket remote origin
+-----------------------------
+git remote add origin https://hessian@bitbucket.org/hessian/olpc.git
+
+
+
+pip 
+-----------------
+pip freeze > requirements.txt -- freeze the requirements of the app before deploying
+
+heroku
 -------------------
+heroku logs - views logs
 
+
+
+postgres installation 
+
+sudo apt-get install postgresql-client
+sudo apt-get install postgresql
+-----------------------------
+sudo -u postgres psql postgres --setup database

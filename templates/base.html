@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='custom_css/custom.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap_flat.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap-responsive.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='jqplot/css/jquery.jqplot.min.css') }}">
   </head>
 
   <body>
@@ -138,5 +139,14 @@
     <script src="{{ url_for('static', filename="bootstrap/js/bootstrap.min.js") }}"></script>
     <script src="{{ url_for('static', filename="RGraph/libraries/RGraph.common.core.js") }}"></script>
     <script src="{{ url_for('static', filename="RGraph/libraries/RGraph.bar.js") }}"></script>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../jquery.jqplot.min.js"></script>
+<script type="text/javascript" src="../plugins/jqplot.barRenderer.min.js"></script>
+<script type="text/javascript" src="../plugins/jqplot.categoryAxisRenderer.min.js"></script>
+<script type="text/javascript" src="../plugins/jqplot.pointLabels.min.js"></script>
+
+
+
   </body>
 </html>

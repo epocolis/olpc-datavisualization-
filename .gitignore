@@ -1,5 +1,8 @@
 <<<<<<< HEAD
 venv
+*.gz
+*.txt
+*dist*
 *.pyc
 *demos*
 *#
@@ -10,4 +13,6 @@ venv
 =======
 *~
 *.py[cod]
+*doc*
+*examples*
 >>>>>>> e9449311a77e35e2abf357dc4ebff2ec09ab5303
