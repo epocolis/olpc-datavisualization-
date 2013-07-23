@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+{% from "security/_macros.html" import render_field_with_errors, render_field %}
+{% include "security/_messages.html" %}
+<form action="{{ url_for_security('login') }}" method="POST" name="login_user_form" class="form-horizontal">
+  <fieldset>
+    <div id="legend">
+      <legend class="">Login</legend>
+    </div>
+    {{ login_user_form.hidden_tag() }}
+    <div class="control-group">
+      <div class="controls">
+      {{ render_field_with_errors(login_user_form.email,placeholder="email",class="input-xlarge") }}
+      </div>
+    </div>
+
+    <div class="control-group">
+      <div class="controls">
+	{{ render_field_with_errors(login_user_form.password,placeholder="password",class="input-xlarge") }}
+      </div>
+    </div>
+
+    <div class="control-group">
+      <div class="controls">
+	{{ render_field(login_user_form.submit,class="btn btn-success") }}
+      </div>
+    </div>
+  </fieldset>
+</form>
+{% endblock %}
