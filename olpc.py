@@ -50,7 +50,7 @@ security = Security(app, user_datastore)
 @app.before_first_request
 def create_user():
     db.create_all()
-    user_datastore.create_user(email='sverma@gmail.com',password=encrypt_password('!olpc_1603!'))
+    user_datastore.create_user(email='sverma@gmail.com',password=encrypt_password('!olpc_1634!'))
     db.session.commit()
 
 
