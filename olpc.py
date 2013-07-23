@@ -46,13 +46,13 @@ user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 security = Security(app, user_datastore)
 
 # Create a user to test with
-"""
+
 @app.before_first_request
 def create_user():
     db.create_all()
-    user_datastore.create_user(email='leotisbuchanan2@gmail.com',password=encrypt_password('password'))
+    user_datastore.create_user(email='sverma@gmail.com',password=encrypt_password('!olpc_1603!'))
     db.session.commit()
-"""
+
 
 
 @app.teardown_request
