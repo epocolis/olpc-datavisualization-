@@ -30,9 +30,9 @@
 	  <div class="nav-collapse collapse">
 	    <ul class="nav">
 	      <li><a href="{{ url_for('main_page') }}">Home</a></li>
-	      <li><a href="{{ url_for('projects_stats_page') }}">Project Stats</a></li>
-	      <li><a href="{{ url_for('applications_stats_page') }}">Application Stats</a></li>
-	      <li><a href="{{ url_for('xo_stats_page') }}">XO Stats</a></li>
+	     <!-- <li><a href="{{ url_for('projects_stats_page') }}">Project Stats</a></li> -->
+	     <!-- <li><a href="{{ url_for('applications_stats_page') }}">Application Stats</a></li>-->
+	     <!-- <li><a href="{{ url_for('xo_stats_page') }}">XO Stats</a></li>-->
 	    </ul>
 	    <ul class="nav pull-right">
 	      <li class="pull-right"><a href="#">Login</a></li>
@@ -123,10 +123,7 @@
       <hr/>
       <div id="footer">
 	<footer>
-	  <p>Olpc data viz crafted by <a href="http://exterbox.com" target="_blank">Leotis Buchanan</a>.|
-	    <a href="http://flask.pocoo.org/"><img  src="http://flask.pocoo.org/static/badges/powered-by-flask-s.png" border="0"  alt="powered by Flask"
-						    title="powered by Flask"></a> | Motivated by <a href="http://laptop.org" target="_blank">one laptop per child</a>
-	  </p>
+	  
 	</footer>
       </div>
       
@@ -137,16 +134,27 @@
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="{{ url_for('static', filename="custom_js/util.js") }}"></script>
     <script src="{{ url_for('static', filename="bootstrap/js/bootstrap.min.js") }}"></script>
-    <script src="{{ url_for('static', filename="RGraph/libraries/RGraph.common.core.js") }}"></script>
-    <script src="{{ url_for('static', filename="RGraph/libraries/RGraph.bar.js") }}"></script>
-
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="../jquery.jqplot.min.js"></script>
-<script type="text/javascript" src="../plugins/jqplot.barRenderer.min.js"></script>
-<script type="text/javascript" src="../plugins/jqplot.categoryAxisRenderer.min.js"></script>
-<script type="text/javascript" src="../plugins/jqplot.pointLabels.min.js"></script>
 
 
+    <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
+    <!-- Bar chart for activities -->
+    <script src="{{ url_for('static', filename="jqplot/js/jquery.jqplot.min.js") }}"></script>
+    <script src="{{ url_for('static', filename="jqplot/plugins/jqplot.barRenderer.js") }}"></script>
+    <script src="{{ url_for('static', filename="jqplot/plugins/jqplot.categoryAxisRenderer.js") }}"></script>
+    <script src="{{ url_for('static', filename="jqplot/plugins/jqplot.pointLabels.min.js") }}"></script>
 
+
+
+    <!-- pie charts for time of day 8am to 3pm  3pm to 8am
+    <!-- libraries required for pie chart -->
+    <script src="{{ url_for('static', filename="jqplot/plugins/jqplot.donutRenderer.min.js") }}"></script>
+    <script src="{{ url_for('static', filename="jqplot/plugins/jqplot.pieRenderer.min.js") }}"></script>
+
+
+    <!-- collaboration private vs share as pie -->
+
+
+    <!-- use by day of week as bar chart -->
+    <script src="{{ url_for('static', filename="test.js") }}"></script>
   </body>
 </html>

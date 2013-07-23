@@ -1,11 +1,6 @@
 
 
-.kpi{
-
-    text-align: center;
-    color : white;
-    margin-bottom: 20px; 
-}
+.top-buffer { margin-top:70px; }
 
 
 .ldeploy{
@@ -21,28 +16,9 @@
 }
 
 
-.xowild{
-     background-color : rgb(192, 57, 43); 
 
-}
 #footer{
     text-align: center;
 
 }
 
-#kpi_total_projects{
-  
- background-color : rgb(39, 174, 96); 
-
-}
-
-.kpi_total_applications{
-
- background-color : rgb(155, 89, 182); 
-
-}
-
-.kpi_pop_app{
-
-   background-color : rgb(231, 76, 60); 
-}
