@@ -46,13 +46,13 @@ user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 security = Security(app, user_datastore)
 
 # Create a user to test with
-
+"""
 @app.before_first_request
 def create_user():
     db.create_all()
     user_datastore.create_user(email='sverma@gmail.com',password=encrypt_password('!olpc_1634!'))
     db.session.commit()
-
+"""
 
 
 @app.teardown_request
@@ -91,10 +91,7 @@ def about_us():
     return "about us"
 
 
-@app.route('/xo_stats', methods=['GET'])
-def xo_stats_page():
-    data = {} 
-    return render_template('xo_stats.html',data=data )
+
 
 
 class Project:
@@ -130,6 +127,9 @@ def getAllProjectsFromDB():
 @login_required
 def main_page():
       return render_template('index.html', page = "FRONT_PAGE")
+
+
+
 
 
 @app.route('/contact', methods=['GET', 'POST'])

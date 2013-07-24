@@ -10,8 +10,7 @@ $(document).ready(function(){
 function draw_collaboration_pie_chart(){
     
     var data = [
-	['Heavy Industry', 12],['Retail', 9], ['Light Industry', 14], 
-	['Out of home', 16],['Commuting', 7], ['Orientation', 9]
+	['8am to 3pm', 25],['3pm to 8pm', 75]
     ];
     var plot1 = jQuery.jqplot ('chart1', [data], 
 			       { 
@@ -35,8 +34,8 @@ function draw_timeofday_use_chart(){
     //for 8am to 3pm 3pm to 8pm
     
     var data = [
-	['Heavy Industry', 12],['Retail', 9], ['Light Industry', 14], 
-	['Out of home', 16],['Commuting', 7], ['Orientation', 9]
+	['Invite', 12],['Public', 20], ['Private', 14] 
+	
     ];
     var plot1 = jQuery.jqplot ('chart2', [data], 
 			       { 
@@ -61,8 +60,8 @@ function draw_timeofday_use_chart(){
 function draw_use_by_day_of_week_chart() {
     
     var data = [
-	['Heavy Industry', 12],['Retail', 9], ['Light Industry', 14], 
-	['Out of home', 16],['Commuting', 7], ['Orientation', 9]
+	['Mon', 12],['Tues', 9], ['Wed', 14], 
+	['Thurs', 16],['Frid', 7], ['Sat', 9],['Sun', 15]
     ];
     var plot1 = jQuery.jqplot ('chart3', [data], 
 			       { 
@@ -84,20 +83,34 @@ function draw_use_by_day_of_week_chart() {
 
 function draw_activities_bar_chart(){
 
-    var line1 = [['Cup Holder Pinion Bob', 7], ['Generic Fog Lamp', 9], ['HDTV Receiver', 15],
-		 ['8 Track Control Module', 12], [' Sludge Pump Fourier Modulator', 3],
-		 ['Transcender/Spice Rack', 6], ['Hair Spray Danger Indicator', 18]];
+var line1 = [['Pippy' ,30],
+	     ['tuxMath',80],
+	     ['Wine',40],
+	     ['Moon' ,26],
+	     ['AcousticMeasure',18],
+	     ['Deducto',55]]
+
+
+
     
     var plot1 = $.jqplot('chart4', [line1], {
+        seriesColors: [ "#4bb2c5", "#c5b47f", "#EAA228", "#579575", "#839557", "#958c12",
+        "#953579", "#4b5de4", "#d8b83f"],
+	series:[
+            {label:'Hotel'},
+            {label:'Event Regristration'},
+            {label:'Airfare'}
+        ],
 	title: 'Frequency bar chart of activities.',
 	series:[{renderer:$.jqplot.BarRenderer}],
 	axesDefaults: {
             tickRenderer: $.jqplot.CanvasAxisTickRenderer ,
             tickOptions: {
-		angle: -30,
+		angle: 30,
 		fontSize: '10pt'
             }
 	},
+	
 	axes: {
 	    xaxis: {
 		renderer: $.jqplot.CategoryAxisRenderer

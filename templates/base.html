@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>OLPC DASHBOARD</title>
+    <title>Olpc Dashboard</title>
     <style type="text/css">
       body {
       padding-top: 100px;
@@ -30,12 +30,16 @@
 	  <div class="nav-collapse collapse">
 	    <ul class="nav">
 	      <li><a href="{{ url_for('main_page') }}">Home</a></li>
-	     <!-- <li><a href="{{ url_for('projects_stats_page') }}">Project Stats</a></li> -->
-	     <!-- <li><a href="{{ url_for('applications_stats_page') }}">Application Stats</a></li>-->
-	     <!-- <li><a href="{{ url_for('xo_stats_page') }}">XO Stats</a></li>-->
 	    </ul>
 	    <ul class="nav pull-right">
-	      <li class="pull-right"><a href="#">Login</a></li>
+	      {% if  not  current_user.is_authenticated() %}
+	      <li class="pull-right"><a href="{{ url_for_security('login') }}">log in</a></li>
+	      {% else %}
+	      <li class="pull-right"><a href="{{ url_for_security('logout') }}">log out</a></li>
+	      {% endif %}
+
+
+	      
 	      <li><a href="http://one.laptop.org/">one laptop per child</a></li>
 	    </ul>
 	  </div>
@@ -121,13 +125,31 @@
       {% endblock %}
       
       <hr/>
-      <div id="footer">
-	<footer>
-	  
-	</footer>
-      </div>
       
     </div> <!--container  div -->
+
+
+    <div id="footer">
+      <div class="container">
+	<div class="row">
+	  <div class="span6">
+	    © 2013 <a href="http://example.com">Demo Dashboard</a>, all rights reserved.
+	  </div> <!-- /span6 -->
+	  <div id="Created By" class="span6">
+	    <a href="#">Built by Leotis Buchanan and Sameer Verma.</a>				
+	  </div> <!-- /.span6 -->
+	</div> <!-- /row -->
+      </div> <!-- /container -->
+    </div> <!-- /#footer -->
+
+	
+
+
+  
+
+
+
+
 
 <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> -->
     <!--    <script src="{{ url_for('static', filename="jquery/jquery-1.10.1.js") }}"></script> -->
